@@ -1,0 +1,76 @@
+{
+  "name": "genai-otel-ts",
+  "version": "0.1.0",
+  "description": "One-line, zero-config OpenTelemetry instrumentation for TypeScript AI SDK calls. Emits standard OTel GenAI semantic-convention spans and metrics for the Vercel AI SDK, OpenAI SDK, Anthropic SDK, and MCP clients - no vendor lock-in.",
+  "keywords": [
+    "opentelemetry",
+    "otel",
+    "genai",
+    "llm",
+    "observability",
+    "tracing",
+    "openai",
+    "anthropic",
+    "vercel-ai-sdk",
+    "ai-sdk",
+    "mcp",
+    "model-context-protocol",
+    "semantic-conventions",
+    "instrumentation"
+  ],
+  "license": "MIT",
+  "author": "JaydenCJ",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JaydenCJ/genai-otel-ts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JaydenCJ/genai-otel-ts/issues"
+  },
+  "homepage": "https://github.com/JaydenCJ/genai-otel-ts#readme",
+  "type": "module",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/esm/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "build": "npm run clean && tsc -p tsconfig.esm.json && tsc -p tsconfig.cjs.json && node scripts/prepare-dist.mjs",
+    "clean": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\"",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.test.json",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prepublishOnly": "npm run build && npm test"
+  },
+  "peerDependencies": {
+    "@opentelemetry/api": ">=1.9.0 <2"
+  },
+  "devDependencies": {
+    "@opentelemetry/api": "^1.9.0",
+    "@opentelemetry/context-async-hooks": "^2.9.0",
+    "@opentelemetry/sdk-metrics": "^2.0.0",
+    "@opentelemetry/sdk-trace-base": "^2.0.0",
+    "@types/node": "^22.20.0",
+    "eslint": "^10.6.0",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.63.0",
+    "vitest": "^3.2.4"
+  }
+}
